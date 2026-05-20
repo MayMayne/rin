@@ -1,1 +1,16 @@
-{"article": {"title": "Bài viết"},"moments": {"title": "Đề cử app."},"hashtags": "Tin tức","about": {"title": "Về Mây"}}
+{
+  "article": {
+    "title": "Bài viết"
+  },
+  "moments": {
+    "title": "Đề cử app."
+  },
+  "hashtags": "Tin tức",
+  "about": {
+    "title": "Về Mây"
+  },
+  "timeline": "Góp ý",
+  "friends": {
+    "title": "Cộng đồng Mây đề cử"
+  }
+}
