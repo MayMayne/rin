@@ -17,7 +17,7 @@ function FeedCardImage({ src, variant }: { src: string; variant: FeedCardVariant
     const imageFrameClass =
         variant === "editorial"
             ? "relative flex max-h-80 w-full flex-row items-center overflow-hidden rounded-[20px]"
-            : "relative mb-2 flex max-h-80 w-full flex-row items-center overflow-hidden rounded-xl";
+            : "relative mb-3 flex max-h-80 w-full flex-row items-center overflow-hidden rounded-2xl";
 
     useEffect(() => {
         if (!blurhash || !canvasRef.current) {
@@ -50,7 +50,7 @@ function FeedCardImage({ src, variant }: { src: string; variant: FeedCardVariant
                 height={height}
                 onLoad={onLoad}
                 onError={onError}
-                className={`absolute inset-0 h-full w-full object-cover object-center hover:scale-105 translation duration-300 ${blurhash && (!loaded || failed) ? "opacity-0" : "opacity-100"
+                className={`absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 hover:scale-105 ${blurhash && (!loaded || failed) ? "opacity-0" : "opacity-100"
                     }`}
             />
         </div>
@@ -68,11 +68,11 @@ const FEED_CARD_STYLES: Record<
     }
 > = {
     default: {
-        card: "my-2 inline-block w-full break-inside-avoid rounded-2xl bg-w p-6 duration-300 bg-button",
+        card: "group my-3 inline-block w-full break-inside-avoid rounded-3xl border border-black/[0.04] bg-w p-5 shadow-[0_8px_30px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)] dark:border-white/10 dark:shadow-[0_8px_30px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_20px_40px_rgba(0,0,0,0.35)]",
         imageWrap: "",
-        meta: "text-gray-400 text-sm",
-        summary: "line-clamp-4 text-pretty overflow-hidden dark:text-neutral-500",
-        title: "text-xl font-bold text-gray-700 dark:text-white text-pretty overflow-hidden",
+        meta: "text-sm text-neutral-400 dark:text-neutral-500",
+        summary: "mt-2 line-clamp-4 text-pretty leading-relaxed text-neutral-600 dark:text-neutral-400",
+        title: "text-xl font-semibold tracking-tight text-neutral-800 transition-colors group-hover:text-theme dark:text-white dark:group-hover:text-theme",
     },
     editorial: {
         card: "my-3 inline-block w-full break-inside-avoid overflow-hidden rounded-[28px] border border-black/10 bg-w p-3 shadow-[0_24px_60px_rgba(15,23,42,0.08)] transition-all hover:-translate-y-0.5 hover:shadow-[0_28px_70px_rgba(15,23,42,0.12)] dark:border-white/10",
@@ -112,7 +112,7 @@ export function FeedCard({ id, title, avatar, draft, listed, top, summary, hasht
             ) : null}
             <div className={activeVariant === "editorial" ? "px-2 pb-2" : ""}>
                 <h1 className={styles.title}>{title}</h1>
-                <p className={`space-x-2 ${styles.meta}`}>
+                <p className={`mt-1.5 space-x-2 ${styles.meta}`}>
                     <span title={new Date(createdAt).toLocaleString()}>
                         {createdAt === updatedAt ? timeago(createdAt) : t('feed_card.published$time', { time: timeago(createdAt) })}
                     </span>
@@ -129,7 +129,7 @@ export function FeedCard({ id, title, avatar, draft, listed, top, summary, hasht
                 </p>
                 <p className={`${styles.summary} ${activeVariant === "editorial" ? "mt-4 max-w-3xl" : ""}`}>{summary}</p>
                 {hashtags.length > 0 &&
-                    <div className={`flex flex-row flex-wrap justify-start gap-2 ${activeVariant === "editorial" ? "mt-4" : "mt-2 gap-x-2"}`}>
+                    <div className={`flex flex-row flex-wrap justify-start gap-2 ${activeVariant === "editorial" ? "mt-4" : "mt-3"}`}>
                         {hashtags.map(({ name }, index) => (
                             <HashTag key={index} name={name} />
                         ))}
